@@ -1,15 +1,14 @@
 #include <stdio.h>
+#include <stdlib.h>
 #include "lexer.h"
 
 static char** array_of_tokens;
 
 int main(){
-	while(1){
+	for(;;){
 		char* input = get_str();
 
-		array_of_tokens = init_lex(input);
-
-		free(input);
+		init_lex(input);
 	}
 
 	return 0;

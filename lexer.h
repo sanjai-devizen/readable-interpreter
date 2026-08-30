@@ -14,22 +14,36 @@ enum{
 	RPAREN
 };
 
+static char* token_names[] = {
+	"CONSTANT",
+	"ADD",
+	"MINUS",
+	"MULTIPLY",
+	"DIVIDE",
+	"LGREAT",
+	"LLESS",
+	"EQUAL",
+	"LPAREN",
+	"RPAREN"
+};
+
 typedef struct{
-	int ch;
+	char* ch;
 	int type;
 	int index;
 } Token;
 
 typedef struct{
-	char** tokens;
+	Token** tokens;
 	int n_tokens;
 } T_Array;
 
 typedef struct{
 	char* exp;
-	int curr_index;
+	int index;
 } Exp;
 
-char* get_exp();
+char* get_str();
+void init_lex(char* string);
 
 #endif
