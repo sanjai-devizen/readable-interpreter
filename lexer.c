@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include "lexer.h"
+#include "define.h"
 
 #define EXP_SIZE 50
 #define CHAR_SIZE 64
@@ -29,8 +29,6 @@ char* get_str(){
 	char* str = (char*)malloc(sizeof(char) * EXP_SIZE);
 	printf("\n>> ");
 	if (fgets(str, EXP_SIZE, stdin) != NULL) {
-        // fgets includes the '\n' (Enter key) at the end of the string. 
-        // This removes it so it doesn't mess up your lexer.
         str[strcspn(str, "\n")] = '\0';
     }
 
@@ -77,7 +75,7 @@ void print_tokens(T_Array* token_array){
 	for(int i = 0; i < token_array->n_tokens; i++){
 		Token* token = token_array->tokens[i];
 
-		printf("%s(%s)", token_names[token->type], token->ch);
+		printf("%s(%s) ", token_names[token->type], token->ch);
 	}
 }
 
