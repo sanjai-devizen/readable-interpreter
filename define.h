@@ -1,5 +1,5 @@
-#ifndef LEXER_H
-#define LEXER_H
+#ifndef DEFINE_H
+#define DEFINE_H
 
 enum{
 	CONSTANT,
@@ -17,19 +17,6 @@ enum{
 enum{
 	BINOP,
 	NUMBER
-};
-
-static char* token_names[] = {
-	"CONSTANT",
-	"ADD",
-	"MINUS",
-	"MULTIPLY",
-	"DIVIDE",
-	"LGREAT",
-	"LLESS",
-	"EQUAL",
-	"LPAREN",
-	"RPAREN"
 };
 
 typedef struct{
@@ -50,22 +37,34 @@ typedef struct{
 	
 typedef struct{
 	int kind;
-
-	union{
-		struct bin_op{
-			struct bin_op* left;
-			int op;
-			struct bin_op* right;
-		};
-
-		struct number{
-			int value;
-		};
-	} data;
-
+	struct Node* left;
+	int binop;
+	struct Node* right;
+	int number;
 } Node;
+
+static char* token_names[] = {
+	"CONSTANT",
+	"ADD",
+	"MINUS",
+	"MULTIPLY",
+	"DIVIDE",
+	"LGREAT",
+	"LLESS",
+	"EQUAL",
+	"LPAREN",
+	"RPAREN"
+};
+static Exp* ex = NULL;
+static Token* token = NULL;
+static T_Array* token_array = NULL;
+static Node* ast = NULL;
 
 char* get_str();
 void init_lex(char* string);
+
+void init_parser();
+
+void free_all();
 
 #endif

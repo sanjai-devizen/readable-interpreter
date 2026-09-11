@@ -71,18 +71,14 @@ int peek_from_exp_c(Exp* exp){
 	return ch;
 }
 
-void print_tokens(T_Array* token_array){
-	for(int i = 0; i < token_array->n_tokens; i++){
-		Token* token = token_array->tokens[i];
-
-		printf("%s(%s) ", token_names[token->type], token->ch);
-	}
+void print_error(char* ch){
+	printf("\nInvalid character found : %c\n", ch[0]);
 }
 
 void init_lex(char* string){
 	//Making of expression and initializing token array
-	Exp* ex = make_exp_from_str(string);
-	T_Array* token_array = (T_Array*)malloc(sizeof(T_Array));
+	ex = make_exp_from_str(string);
+	token_array = (T_Array*)malloc(sizeof(T_Array));
 
 	token_array->tokens = init_token_array(strlen(ex->exp) + 1);
 	token_array->n_tokens = 0;
@@ -97,61 +93,65 @@ void init_lex(char* string){
 		if (ch[0] != ' '){
 
 		//Making of token
-		Token* token = (Token*)malloc(sizeof(Token));
+		token = (Token*)malloc(sizeof(Token));
 		token->ch = ch;
-				if (!strcmp(ch, "+")) { 
-					token->type = ADD;
-					token->index = ex->index;
-				} else if (!strcmp(ch, "-")) { 
-					token->type = MINUS;
-					token->index = ex->index;
-				} else if (!strcmp(ch, "*")) { 
-					token->type = MULTIPLY;
-					token->index = ex->index;
-				} else if (!strcmp(ch, "/")) { 
-					token->type = DIVIDE;
-					token->index = ex->index;
-				} else if (!strcmp(ch, ">")) { 
-					token->type = LGREAT;
-					token->index = ex->index;
-				} else if (!strcmp(ch, "<")) { 
-					token->type = LLESS;
-					token->index = ex->index;
-				} else if (!strcmp(ch, "(")) { 
-					token->type = LPAREN;
-					token->index = ex->index;
-				} else if (!strcmp(ch, ")")) { 
-					token->type = RPAREN;
-					token->index = ex->index;
-				} else if (!strcmp(ch, "=")){
-					if (peek_from_exp_c(ex) == '='){
-						int next_ch = get_from_exp_c(ex);
-						char append_str[2] = {(char)next_ch, '\0'};							
-						
-						str_append(token->ch, append_str);
-					}
-				} else if (ch[0] >= '0' && ch[0] <= '9'){
-					token->type = CONSTANT;
-					token->index = ex->index;
-					while(peek_from_exp_c(ex) >= '0' && peek_from_exp_c(ex) <= '9'){
-						int next_ch = get_from_exp_c(ex);
-						char append_str[2] = {(char)next_ch, '\0'};							
-						
-						str_append(token->ch, append_str);
-					}			
-				}	
+			if (!strcmp(ch, "+")) { 
+				token->type = ADD;
+				token->index = ex->index;
+			} else if (!strcmp(ch, "-")) { 
+				token->type = MINUS;
+				token->index = ex->index;
+			} else if (!strcmp(ch, "*")) { 
+				token->type = MULTIPLY;
+				token->index = ex->index;
+			} else if (!strcmp(ch, "/")) { 
+				token->type = DIVIDE;
+				token->index = ex->index;
+			} else if (!strcmp(ch, ">")) { 
+				token->type = LGREAT;
+				token->index = ex->index;
+			} else if (!strcmp(ch, "<")) { 
+				token->type = LLESS;
+				token->index = ex->index;
+			} else if (!strcmp(ch, "(")) { 
+				token->type = LPAREN;
+				token->index = ex->index;
+			} else if (!strcmp(ch, ")")) { 
+				token->type = RPAREN;
+				token->index = ex->index;
+			} else if (!strcmp(ch, "=")){
+				if (peek_from_exp_c(ex) == '='){
+					token->type = EQUAL;
+					token->index = ex->index - 1;
+					int next_ch = get_from_exp_c(ex);
+					char append_str[2] = {(char)next_ch, '\0'};							
+					
+					str_append(token->ch, append_str);
+				} else {
+					print_error(token->ch);
+					token_array = NULL;
+
+					break;
+				}
+			} else if (ch[0] >= '0' && ch[0] <= '9'){
+				token->type = CONSTANT;
+				token->index = ex->index;
+				while(peek_from_exp_c(ex) >= '0' && peek_from_exp_c(ex) <= '9'){
+					int next_ch = get_from_exp_c(ex);
+					char append_str[2] = {(char)next_ch, '\0'};							
+					
+					str_append(token->ch, append_str);
+				}			
+			} else{
+				print_error(token->ch);
+				token_array = NULL;
+
+				break;
+			}
 
 		store_token_into_array(token, token_array);
 		}
 	}
-	print_tokens(token_array);
 
-	//freeing dynamically allocated memory space
-	free(ex);
-    for(int i = 0; i < token_array->n_tokens; i++){
-        free(token_array->tokens[i]->ch); // Free the string buffer first
-        free(token_array->tokens[i]);     // Then free the token struct
-    }
-    free(token_array->tokens); // Free the pointer array
-    free(token_array);
+	free_all();
 }
