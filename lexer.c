@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include "define.h"
+#include "colour.h"
 
 #define EXP_SIZE 50
 #define CHAR_SIZE 64
@@ -32,7 +33,7 @@ char* pack_char_into_str(int ch){
 
 char* get_str(){
 	char* str = (char*)malloc(sizeof(char) * EXP_SIZE);
-	printf("\n>> ");
+	printf("\n%s>> %s", BOLD_BLUE, COLOR_RESET);
 	if (fgets(str, EXP_SIZE, stdin) != NULL) {
         str[strcspn(str, "\n")] = '\0';
     }
@@ -77,7 +78,7 @@ int peek_from_exp_c(Exp* exp){
 }
 
 void print_error(char* ch){
-	printf("\nInvalid character found : %c\n", ch[0]);
+	printf("\n%sInvalid character found : %c%s\n", BOLD_RED, ch[0], COLOR_RESET);
 }
 
 void init_lex(char* string){

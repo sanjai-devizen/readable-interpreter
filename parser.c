@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "define.h"
+#include "colour.h"
 
 /* GRAMMAR for the recursive descent parser:
  *
@@ -144,7 +145,7 @@ Node* parse_factor(void){
 
             return node;
 		} else {
-			printf("\nparse error : Invalid syntax, expected : ')'\n");
+			printf("\n%sparse error : Invalid syntax, expected : ')'%s\n", BOLD_RED, COLOR_RESET);
 			free_all(); 
 			exit(1);
 		}
@@ -153,7 +154,7 @@ Node* parse_factor(void){
 
         return number_node; 
 	} else {
-		printf("\nparse error : invalid syntax, expected : number or '('\n");
+		printf("\n%sparse error : invalid syntax, expected : number or '('%s\n", BOLD_RED, COLOR_RESET);
 		exit(1);
 	}
 }

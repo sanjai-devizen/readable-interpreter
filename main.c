@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include "define.h"
+#include "colour.h"
 
 void print_tokens(T_Array* token_array){
 	for(int i = 0; i < token_array->n_tokens; i++){
@@ -26,10 +27,11 @@ void print_ast(Node* ast){
 }
 
 int main(){
-	printf("READABLE-INTERPRETER : lexer done, lexer output -\n");
+	printf("%s\nREADABLE-INTERPRETER :%s\n", BOLD_GREEN, COLOR_RESET);
 	for(;;){
 		char* input = get_str();
 		if (strcmp(input, "exit") == 0) break;
+		else if (strcmp(input, "") == 0) continue;
 
 		ex = NULL;
 		token = NULL;
@@ -47,7 +49,7 @@ int main(){
 		init_parser();
 
 		if (ast != NULL){
-			printf("\n\nAST tree :\n");
+			printf("\n\n%sAST tree : %s", COLOR_GREEN, COLOR_RESET);
 			print_ast(ast);
 		}
 
