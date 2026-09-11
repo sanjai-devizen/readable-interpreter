@@ -35,10 +35,10 @@ typedef struct{
 	int index;
 } Exp;
 	
-typedef struct{
+typedef struct Node{
 	int kind;
 	struct Node* left;
-	int binop;
+	char binop;
 	struct Node* right;
 	int number;
 } Node;
@@ -55,10 +55,10 @@ static char* token_names[] = {
 	"LPAREN",
 	"RPAREN"
 };
-static Exp* ex = NULL;
-static Token* token = NULL;
-static T_Array* token_array = NULL;
-static Node* ast = NULL;
+extern Exp* ex;
+extern Token* token;
+extern T_Array* token_array;
+extern Node* ast;
 
 char* get_str();
 void init_lex(char* string);

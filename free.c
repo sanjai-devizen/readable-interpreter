@@ -12,5 +12,5 @@ void free_all(){
 	    free(token_array->tokens); // Free the pointer array
 	    free(token_array);
 	}
-	if (tree != NULL) free(tree);
+	if (ast != NULL) free(ast);
 }

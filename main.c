@@ -12,6 +12,18 @@ void print_tokens(T_Array* token_array){
 	printf("\n");
 }
 
+void print_ast(Node* ast){
+	if (ast != NULL){
+		if (ast->kind == BINOP){
+			printf("%c", ast->binop);
+		} else {
+			printf("%d", ast->number);
+		}
+
+		print_ast(ast->left);
+		print_ast(ast->right);
+	}
+}
 
 int main(){
 	printf("READABLE-INTERPRETER : lexer done, lexer output -\n");
@@ -24,6 +36,11 @@ int main(){
 		if (token_array != NULL) print_tokens(token_array);
 
 		init_parser();
+
+		printf("\n\nAST tree :\n");
+		print_ast(ast);
+
+		free_all();
 	}
 
 	return 0;

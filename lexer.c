@@ -6,6 +6,11 @@
 #define EXP_SIZE 50
 #define CHAR_SIZE 64
 
+Exp* ex = NULL;
+Token* token = NULL;
+T_Array* token_array = NULL;
+Node* ast = NULL;
+
 //Custom written string append function
 void str_append(char* str_1, char* str_2){
 	int end_str_1 = 0, end_str_2 = 0;
@@ -80,7 +85,7 @@ void init_lex(char* string){
 	ex = make_exp_from_str(string);
 	token_array = (T_Array*)malloc(sizeof(T_Array));
 
-	token_array->tokens = init_token_array(strlen(ex->exp) + 1);
+	token_array->tokens = init_token_array(strlen(ex->exp) + 2);
 	token_array->n_tokens = 0;
 
 	//tokenization engine
@@ -153,5 +158,5 @@ void init_lex(char* string){
 		}
 	}
 
-	free_all();
+	token_array->tokens[token_array->n_tokens] = NULL;
 }
