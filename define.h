@@ -67,4 +67,6 @@ void init_parser();
 
 void free_all();
 
+void init_walker();
+
 #endif

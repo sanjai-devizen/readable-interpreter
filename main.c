@@ -30,15 +30,28 @@ int main(){
 	for(;;){
 		char* input = get_str();
 		if (strcmp(input, "exit") == 0) break;
+
+		ex = NULL;
+		token = NULL;
+		token_array = NULL;
+		ast = NULL;
 		
 		init_lex(input);
 
 		if (token_array != NULL) print_tokens(token_array);
+		else {
+			free_all();
+			continue;
+		}
 
 		init_parser();
 
-		printf("\n\nAST tree :\n");
-		print_ast(ast);
+		if (ast != NULL){
+			printf("\n\nAST tree :\n");
+			print_ast(ast);
+		}
+
+		init_walker();
 
 		free_all();
 	}

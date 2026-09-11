@@ -81,6 +81,7 @@ void print_error(char* ch){
 }
 
 void init_lex(char* string){
+
 	//Making of expression and initializing token array
 	ex = make_exp_from_str(string);
 	token_array = (T_Array*)malloc(sizeof(T_Array));
@@ -154,9 +155,10 @@ void init_lex(char* string){
 				break;
 			}
 
-		store_token_into_array(token, token_array);
+		if (token_array != NULL) store_token_into_array(token, token_array);
+		else break;
 		}
 	}
 
-	token_array->tokens[token_array->n_tokens] = NULL;
+	if (token_array != NULL) token_array->tokens[token_array->n_tokens] = NULL;
 }
