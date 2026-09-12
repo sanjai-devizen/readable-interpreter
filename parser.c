@@ -154,7 +154,7 @@ Node* parse_factor(void){
 
         return number_node; 
 	} else {
-		printf("\n%sparse error : invalid syntax, expected : number or '('%s\n", BOLD_RED, COLOR_RESET);
+		printf("\n%sparse error : Invalid syntax, expected : number or '('%s\n", BOLD_RED, COLOR_RESET);
 		exit(1);
 	}
 }
@@ -171,5 +171,5 @@ void init_parser(void){
     printf("\nStarting up AST tree...");
 	ast = parse_expr();
 
-	printf("\nAST successfully constructed :)"); 
+	printf("\n%sAST successfully constructed :)%s", COLOR_GREEN, COLOR_RESET); 
 }

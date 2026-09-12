@@ -7,6 +7,8 @@
 #define EXP_SIZE 50
 #define CHAR_SIZE 64
 
+#define PROMPT_COLOR 
+
 Exp* ex = NULL;
 Token* token = NULL;
 T_Array* token_array = NULL;
@@ -33,7 +35,7 @@ char* pack_char_into_str(int ch){
 
 char* get_str(){
 	char* str = (char*)malloc(sizeof(char) * EXP_SIZE);
-	printf("\n%s>> %s", BOLD_BLUE, COLOR_RESET);
+	printf("\n%s./ri/$ %s", BOLD_BLUE, COLOR_RESET);
 	if (fgets(str, EXP_SIZE, stdin) != NULL) {
         str[strcspn(str, "\n")] = '\0';
     }
@@ -78,7 +80,7 @@ int peek_from_exp_c(Exp* exp){
 }
 
 void print_error(char* ch){
-	printf("\n%sInvalid character found : %c%s\n", BOLD_RED, ch[0], COLOR_RESET);
+	printf("\n%sInvalid character found :%s %c\n", BOLD_RED, COLOR_RESET, ch[0]);
 }
 
 void init_lex(char* string){

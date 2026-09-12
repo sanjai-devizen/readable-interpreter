@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include "define.h"
+#include "colour.h"
 
 int ast_walk(Node* ast){
 	if (ast != NULL){
@@ -20,6 +21,6 @@ void init_walker(){
 
 	final_result = ast_walk(ast);
 
-	printf("\nWalker done :) Output : \n");
-	printf("%d\n", final_result);
+	printf("\n\n%sWalker done :) Output :%s ", COLOR_GREEN, COLOR_RESET);
+	printf("%s%d%s\n", COLOR_MAGENTA, final_result, COLOR_RESET);
 }
