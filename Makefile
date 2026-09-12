@@ -13,7 +13,7 @@ all: $(TARGET)
 $(TARGET): $(OBJS)
 	$(CC) $(CFLAGS) -o $(TARGET) $(OBJS)
 	echo "$(TARGET) built."
-	echo "Run with 'ri'."
+	echo "Run with 'make ri'."
 
 %.o: %.c
 	$(CC) $(CFLAGS) -c $< -o $@
@@ -24,6 +24,6 @@ ri: $(TARGET)
 
 .PHONY: clean
 clean:
-	del /q *.o *.exe 2>nul || rm -f *.o *.exe
+	rm -f *.o *.exe
 	echo "Clean complete."
 
