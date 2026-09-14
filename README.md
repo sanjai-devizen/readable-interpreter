@@ -26,3 +26,5 @@ $ make ri
 - A language that I thought of. (why not)
 
 ## How would it look like ? (Some previews)
+
+<img width="1901" height="1005" alt="Screenshot 2026-09-14 195105" src="https://github.com/user-attachments/assets/1747df0d-90d4-4950-b19b-22f4e26bc35b" />
