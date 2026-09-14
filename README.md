@@ -28,3 +28,9 @@ $ make ri
 ## How would it look like ? (Some previews)
 
 <img width="1901" height="1005" alt="Screenshot 2026-09-14 195105" src="https://github.com/user-attachments/assets/1747df0d-90d4-4950-b19b-22f4e26bc35b" />
+
+<img width="350" height="253" alt="Screenshot 2026-09-14 195132" src="https://github.com/user-attachments/assets/968f6e26-f7a5-479f-b0ff-01634adadfc6" />
+
+<img width="745" height="540" alt="Screenshot 2026-09-14 195209" src="https://github.com/user-attachments/assets/3fb72e6b-845d-40c3-b72c-a851fff3014c" />
+
+<img width="831" height="1081" alt="Screenshot 2026-09-14 195513" src="https://github.com/user-attachments/assets/9319268f-767d-4590-b796-128bda895482" />
